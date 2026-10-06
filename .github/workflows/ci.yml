@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c
-      - run: uv run --script plugins/devin-observability/hooks/test_langfuse_export.py
+      - run: uv run --script plugins/devin-langfuse/hooks/test_langfuse_export.py
 
   lint:
     name: lint
@@ -27,5 +27,5 @@ jobs:
       - uses: actions/checkout@v7
       - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c
       - run: |
-          shellcheck plugins/devin-observability/hooks/langfuse-export.sh
-          jq empty plugins/devin-observability/.devin-plugin/plugin.json plugins/devin-observability/hooks.json
+          shellcheck plugins/devin-langfuse/hooks/langfuse-export.sh
+          jq empty plugins/devin-langfuse/.devin-plugin/plugin.json plugins/devin-langfuse/hooks.json

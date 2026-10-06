@@ -1,4 +1,4 @@
-# devin-observability-plugin
+# devin-langfuse-plugin
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -14,7 +14,7 @@ Prerequisites: [Devin CLI](https://docs.devin.ai/cli) signed in (`devin auth log
 
 ```bash
 # 1. Install the plugin (personal manifest, all your machines + Devin Desktop)
-devin plugins install wwwyo/devin-observability-plugin#plugins/devin-observability
+devin plugins install wwwyo/devin-langfuse-plugin#plugins/devin-langfuse
 
 # 2. Export your Langfuse credentials (self-hosted: set LANGFUSE_BASE_URL too)
 export LANGFUSE_PUBLIC_KEY="pk-lf-..."

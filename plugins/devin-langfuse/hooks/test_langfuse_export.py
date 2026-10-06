@@ -5,7 +5,7 @@
 # ///
 """Exporter regressions against the real pinned SDK and a local OTLP collector.
 
-Run: uv run --script plugins/devin-observability/hooks/test_langfuse_export.py
+Run: uv run --script plugins/devin-langfuse/hooks/test_langfuse_export.py
 No cloud credentials, transcripts, or external network are used.
 """
 import json

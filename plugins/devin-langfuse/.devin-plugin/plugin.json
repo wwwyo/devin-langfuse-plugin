@@ -1,11 +1,11 @@
 {
-  "name": "devin-observability",
+  "name": "devin-langfuse",
   "version": "0.1.0",
   "description": "Ships local Devin session transcripts to Langfuse as OTLP traces via Stop/SessionEnd hooks",
   "author": {
     "name": "wwwyo"
   },
-  "repository": "wwwyo/devin-observability-plugin",
+  "repository": "wwwyo/devin-langfuse-plugin",
   "license": "MIT",
   "keywords": ["langfuse", "observability", "tracing", "telemetry"]
 }
