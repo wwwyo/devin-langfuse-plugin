@@ -3,8 +3,8 @@
 # その時点までの turn を Langfuse に export する本体を detached で起動する。
 # Stop（turn 完了ごと）で逐次送り、SessionEnd は最終 flush — SessionEnd が
 # 発火しない/閉じない session でも pi/codex plugin と同様にほぼリアルタイムで
-# trace が見えるようにするため。export は turn_count+末尾 signature の
-# checkpoint で増分のみ送る（langfuse-export.py 側）。
+# trace が見えるようにするため。export は source message ID の
+# fingerprint checkpoint で増分のみ送る（langfuse-export.py 側）。
 # hook は順次実行されるので本体を待つと turn 応答が遅れる。
 # 常に exit 0（hook 失敗で devin の挙動を変えない）
 
@@ -27,7 +27,7 @@ if [ -z "$MISE_AGE_KEY" ]; then
     && export MISE_AGE_KEY
 fi
 
-cd "${DEVIN_PROJECT_DIR:-$PWD}" 2>/dev/null || exit 0
+cd -- "${DEVIN_PROJECT_DIR:-$PWD}" 2>/dev/null || exit 0
 eval "$("$MISE" env -s bash 2>/dev/null)"
 
 # opt-in は dependency 解決（uv run の SDK resolve）より先に判定する。
