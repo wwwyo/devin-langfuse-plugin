@@ -1,0 +1,24 @@
+{
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"${DEVIN_PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/langfuse-export.sh\"",
+          "timeout": 10
+        }
+      ]
+    }
+  ],
+  "SessionEnd": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "sh \"${DEVIN_PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/hooks/langfuse-export.sh\"",
+          "timeout": 10
+        }
+      ]
+    }
+  ]
+}

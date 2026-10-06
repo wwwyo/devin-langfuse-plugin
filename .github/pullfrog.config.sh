@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Server-side Pullfrog config for wwwyo/devin-observability-plugin — this file is the SSOT.
+# Server-side Pullfrog config for wwwyo/devin-langfuse-plugin — this file is the SSOT.
 #
 # .github/workflows/pullfrog.yml is a Pullfrog-managed file kept pristine
 # (byte-identical across repos, updated by upstream PRs). Repo-level settings
@@ -12,7 +12,7 @@
 # BYOK keys are org-scoped (OPENCODE_API_KEY inherited) — see `pf secret list`.
 set -euo pipefail
 
-REPO="wwwyo/devin-observability-plugin"
+REPO="wwwyo/devin-langfuse-plugin"
 PF=(mise exec -- pullfrog)
 
 pf_set()   { "${PF[@]}" config set   "$1" "$2" --repo "$REPO" --yes; }

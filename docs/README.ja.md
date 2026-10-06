@@ -1,4 +1,4 @@
-# devin-observability-plugin
+# devin-langfuse-plugin
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
 
@@ -14,7 +14,7 @@
 
 ```bash
 # 1. plugin を install（personal manifest。全マシン + Devin Desktop に同期）
-devin plugins install wwwyo/devin-observability-plugin#plugins/devin-observability
+devin plugins install wwwyo/devin-langfuse-plugin#plugins/devin-langfuse
 
 # 2. Langfuse の認証情報を env に（self-hosted なら LANGFUSE_BASE_URL も）
 export LANGFUSE_PUBLIC_KEY="pk-lf-..."
