@@ -45,6 +45,7 @@ jq empty plugins/devin-langfuse/.devin-plugin/plugin.json plugins/devin-langfuse
 - Repo opt-in only: `DEVIN_TRACE_TO_LANGFUSE=true` (repo-local `mise.local.toml` `[env]`). An opted-out repo exits before touching uv or the network.
 - Hook always exits 0 and detaches the exporter via `nohup`; `sessions.db` is opened read-only.
 - Default detail is `turn` (one observation per turn, `metadata.telemetry_summary` version=1); `DEVIN_LANGFUSE_DETAIL=full` for per-generation detail. Switching modes must not replay history (fingerprints exclude the mode).
+- Default timing is per-turn (`Stop` incremental + `SessionEnd` final flush); `DEVIN_LANGFUSE_TIMING=session` skips `Stop` in the wrapper only. A payload whose `hook_event_name` is missing or unrecognized must not be skipped — degrading to incremental is safer than losing telemetry entirely.
 - Checkpoints are source message-ID fingerprints keyed under `devin::<session_id>` in `~/.local/state/langfuse-export/state.json`; a turn's checkpoint commits only after confirmed delivery (HTTP error, OTLP partial rejection, or flush failure leaves it pending for retry under the same deterministic IDs).
 - Never emit raw tool bodies or intermediate assistant text in `turn` mode; keep the `telemetry_summary` contract (`version=1` fields) that downstream session-eval reads.
 
