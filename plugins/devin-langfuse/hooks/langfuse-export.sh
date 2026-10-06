@@ -14,6 +14,7 @@ command -v jq >/dev/null 2>&1 || exit 0
 
 sid=$(printf '%s' "$input" | jq -r '.session_id // empty' 2>/dev/null)
 [ -n "$sid" ] || exit 0
+event=$(printf '%s' "$input" | jq -r '.hook_event_name // empty' 2>/dev/null)
 
 MISE=/opt/homebrew/bin/mise
 [ -x "$MISE" ] || MISE=$(command -v mise) || exit 0
@@ -33,6 +34,11 @@ eval "$("$MISE" env -s bash 2>/dev/null)"
 # opt-in は dependency 解決（uv run の SDK resolve）より先に判定する。
 # 未 opt-in repo では uv/network を一切触らずに終わらせる
 [ "$DEVIN_TRACE_TO_LANGFUSE" = "true" ] || exit 0
+
+# DEVIN_LANGFUSE_TIMING=session は Stop（turn ごとの増分送信）を skip し、
+# SessionEnd の一括送信に切り替える。hook_event_name を取れない payload
+# では skip しない — 増分送信に落ちる方が telemetry 全損より安全
+[ "$DEVIN_LANGFUSE_TIMING" = "session" ] && [ "$event" = "Stop" ] && exit 0
 
 UV=$(command -v uv) || UV="$HOME/.local/share/mise/shims/uv"
 [ -x "$UV" ] || exit 0

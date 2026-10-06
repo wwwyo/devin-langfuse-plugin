@@ -32,6 +32,7 @@ opt-in した repo で Devin session を始めると、turn が session id 単�
 
 - **増分・再開可能な export** — 各 turn は一度だけ送られる。checkpoint は配送が確認できてから確定し、retry は同じ deterministic observation ID で行われるため、再起動しても span は重複しない。
 - **既定は compact** — `turn` mode は 1 turn 1 observation に `telemetry_summary`（generation/tool 件数・tool 名・bounded なエラー・model 別 usage）を載せる。`DEVIN_LANGFUSE_DETAIL=full` で generation 単位 + tool 入出力の詳細記録に切り替わる。
+- **一括送信も選べる** — 既定は turn ごとの増分送信。`DEVIN_LANGFUSE_TIMING=session` にすると `Stop` を skip して `SessionEnd` で session 全体を一度に送る（session が正常終了しないと送信されない点に注意）。
 - **全面的に fail-open** — hook は常に exit 0 で detach して動き、`sessions.db` は read-only で開き、agent の挙動を止めたり書き換えたりしない。
 
 cloud Devin session は対象外: plugin hook はローカル session（CLI と Devin Desktop）でのみ動く。

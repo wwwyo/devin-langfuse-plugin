@@ -32,6 +32,7 @@ Start a Devin session in the opted-in repo and watch turns land in Langfuse unde
 
 - **Incremental, resumable export** — each turn ships once; checkpoints commit only after confirmed delivery and retries reuse the same deterministic observation IDs, so restarts never duplicate spans.
 - **Compact by default** — `turn` mode emits one observation per turn with a `telemetry_summary` (generation/tool counts, tool names, bounded errors, usage by model). Set `DEVIN_LANGFUSE_DETAIL=full` for per-generation spans with tool I/O.
+- **Batching optional** — export is incremental per turn by default. Set `DEVIN_LANGFUSE_TIMING=session` to skip `Stop` events and flush the whole session once on `SessionEnd` (nothing is sent if the session never ends cleanly).
 - **Fail-open everywhere** — the hook always exits 0, detaches its work, opens `sessions.db` read-only, and never blocks or rewrites agent behavior.
 
 Cloud Devin sessions are out of scope: plugin hooks run in local sessions (CLI and Devin Desktop) only.
