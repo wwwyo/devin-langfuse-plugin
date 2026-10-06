@@ -1,0 +1,20 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local env / secrets (opt-in files live in local, untracked overrides)
+.env
+.env.local
+*.log
+mise.local.toml
+.claude/settings.local.json
+.codex/langfuse.json
+.pi/settings.json
+.pi/npm/
+
+# Personal notes
+.agent/
+*.local.*
