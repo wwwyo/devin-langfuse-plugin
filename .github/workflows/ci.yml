@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c
+      - uses: jdx/mise-action@9149ea85001c7435d5a66bb127d6a1b6227cb0a5
       - run: uv run --script plugins/devin-langfuse/hooks/test_langfuse_export.py
 
   lint:
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c
+      - uses: jdx/mise-action@9149ea85001c7435d5a66bb127d6a1b6227cb0a5
       - run: |
           shellcheck plugins/devin-langfuse/hooks/langfuse-export.sh
           jq empty plugins/devin-langfuse/.devin-plugin/plugin.json plugins/devin-langfuse/hooks.json
