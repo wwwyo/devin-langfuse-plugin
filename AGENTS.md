@@ -34,11 +34,13 @@ shellcheck plugins/devin-langfuse/hooks/*.sh
 jq empty plugins/devin-langfuse/.devin-plugin/plugin.json plugins/devin-langfuse/hooks.json
 ```
 
+For local iteration, install from this checkout with `devin plugins install --local ./plugins/devin-langfuse` — it live-links the folder on this machine so edits apply on the next session. Repo-source installs are snapshots: pushes reach installed copies only via `devin plugins update`. Plugin hooks fire in local sessions (CLI and Devin Desktop) only; cloud Devin sessions never run them.
+
 ## Tech stack
 
 - POSIX sh hook wrapper + Python single-file scripts executed via `uv run --script` (PEP 723 inline metadata).
 - Python deps (`langfuse`, `requests`) are exact-pinned inside each script's `# /// script` block — Dependabot does not scan PEP 723 metadata, so bump pins manually (7-day cooldown policy).
-- `plugins/devin-langfuse/hooks/langfuse_hook.py` is a vendored copy of the Langfuse Claude Code hook with documented divergences (deterministic source IDs, compact `turn` mode, per-source labels); it also depends on Langfuse SDK 4.x internals — bump SDK pin and re-verify together.
+- `plugins/devin-langfuse/hooks/langfuse_hook.py` is a vendored copy of the Langfuse Claude Code hook with documented divergences (deterministic source IDs, compact `turn` mode, per-source labels); it also depends on Langfuse SDK 4.x internals — bump SDK pin and re-verify together. Keep the vendored file byte-identical to upstream where possible — absorb new behavior in `langfuse-export.sh` / `langfuse-export.py` instead, and enumerate any unavoidable divergence in that list so `diff` against upstream stays auditable.
 
 ## Behavior invariants (do not regress)
 
